@@ -15,9 +15,7 @@ public class UserRepository {
 
   public User updateOrInsertUser(String email, String userName, Date dateOfBirth) {
     Optional<User> existingUser = userMap.values().stream().filter(user -> {
-      return user.getDateOfBirth().getDate() == dateOfBirth.getDate() &&
-          user.getDateOfBirth().getMonth() == dateOfBirth.getMonth() &&
-          user.getDateOfBirth().getYear() == dateOfBirth.getYear();
+      return Objects.equals(user.getUserEmail(), email);
     }).findAny();
 
     // If user exists, return it.
@@ -34,5 +32,9 @@ public class UserRepository {
     this.userMap.put(newUser.getUserId(), newUser);
 
     return newUser;
+  }
+
+  public List<User> getAllUsers() {
+    return new ArrayList<>(this.userMap.values());
   }
 }

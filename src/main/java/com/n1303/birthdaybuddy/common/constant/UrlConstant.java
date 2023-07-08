@@ -12,4 +12,5 @@ public class UrlConstant {
   public static final String USER_API_BASE_URL = "/user";
   public static final String ALL_USER_API_URL = "/all";
   public static final String CREATE_USER = "/create";
+  public static final String SEARCH_USER = "/search";
 }

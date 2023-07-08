@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(UrlConstant.USER_API_BASE_URL)
@@ -29,5 +30,10 @@ public class UserController {
             @RequestParam("userName") String userName,
             @RequestParam("dateOfBirth") Date dob) {
         return new ResponseEntity<>(this.userService.upsertUser(email, userName, dob), HttpStatus.OK);
+    }
+
+    @GetMapping(UrlConstant.SEARCH_USER)
+    public ResponseEntity<List<User>> searchUsers(@RequestParam("query") String query) {
+        return new ResponseEntity<>(this.userService.searchUsers(query), HttpStatus.OK);
     }
 }

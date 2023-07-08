@@ -1,12 +1,20 @@
 package com.n1303.birthdaybuddy.repository;
 
 import com.n1303.birthdaybuddy.entity.User;
+import com.n1303.birthdaybuddy.util.search.GenericSearchPredicate;
+import com.n1303.birthdaybuddy.util.search.SearchCriteria;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository {
+
+  @Autowired
+  private GenericSearchPredicate searchPredicate;
+
   private final Map<String, User> userMap;
 
   public UserRepository() {
@@ -36,5 +44,12 @@ public class UserRepository {
 
   public List<User> getAllUsers() {
     return new ArrayList<>(this.userMap.values());
+  }
+
+
+  public List<User> getAllUsersThatMatchSearchCriteria(List<SearchCriteria> searchCriteria) {
+    return this.userMap.values().stream().filter(user -> {
+      return searchPredicate.test(user, searchCriteria);
+    }).collect(Collectors.toList());
   }
 }

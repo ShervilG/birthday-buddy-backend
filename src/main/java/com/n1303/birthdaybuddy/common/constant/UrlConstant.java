@@ -17,4 +17,6 @@ public class UrlConstant {
   public static final String FRIEND_API_BASE_URL = "/friend";
 
   public static final String ADD_FRIENDSHIP = "add";
+
+  public static final String SEARCH_USER = "/search";
 }

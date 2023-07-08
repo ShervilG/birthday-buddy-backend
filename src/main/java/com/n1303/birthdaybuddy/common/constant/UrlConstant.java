@@ -12,4 +12,9 @@ public class UrlConstant {
   public static final String USER_API_BASE_URL = "/user";
   public static final String ALL_USER_API_URL = "/all";
   public static final String CREATE_USER = "/create";
+
+  // Friend
+  public static final String FRIEND_API_BASE_URL = "/friend";
+
+  public static final String ADD_FRIENDSHIP = "add";
 }

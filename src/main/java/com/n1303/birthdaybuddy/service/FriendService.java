@@ -17,7 +17,7 @@ public class FriendService {
         return friendshipRepository.getAll();
     }
 
-    public void insert(String firstUser, String secondUser) {
-        friendshipRepository.insert(firstUser,secondUser);
+    public Friendship insert(String firstUser, String secondUser) {
+        return friendshipRepository.insert(firstUser,secondUser);
     }
 }

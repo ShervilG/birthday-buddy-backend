@@ -4,6 +4,8 @@ import com.n1303.birthdaybuddy.common.constant.UrlConstant;
 import com.n1303.birthdaybuddy.entity.Friendship;
 import com.n1303.birthdaybuddy.service.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +23,8 @@ public class FriendsController {
     }
 
     @PostMapping(UrlConstant.ADD_FRIENDSHIP)
-    public void insert(@RequestParam("firstUser") String firstUser,
-                       @RequestParam("secondUser") String secondUser) {
-        this.friendService.insert(firstUser,secondUser);
+    public ResponseEntity<Friendship> insert(@RequestParam("firstUser") String firstUser,
+                                             @RequestParam("secondUser") String secondUser) {
+        return new ResponseEntity<>(this.friendService.insert(firstUser,secondUser), HttpStatus.OK);
     }
 }

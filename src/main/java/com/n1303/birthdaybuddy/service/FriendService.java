@@ -25,4 +25,8 @@ public class FriendService {
     public List<User> getAllUsersFriend(String userId) {
         return friendshipRepository.getAllFriendsOfUser(userId);
     }
+
+    public boolean delete(String firstUser, String secondUser) {
+        return friendshipRepository.delete(firstUser,secondUser);
+    }
 }

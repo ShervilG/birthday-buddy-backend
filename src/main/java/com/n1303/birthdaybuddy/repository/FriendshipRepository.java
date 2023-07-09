@@ -32,7 +32,7 @@ public class FriendshipRepository {
                     Objects.equals(friendship.getSecondUserId() , firstUser);
         }).findAny();
 
-        // If user exists, return it.
+        // If friendship exists, return it.
         if (existingFriends.isPresent()) {
             return existingFriends.get();
         }
@@ -60,5 +60,21 @@ public class FriendshipRepository {
         }
 
         return userRepository.getAllUsersInRange(friendsUserIdList);
+    }
+
+    public boolean delete(String firstUser, String secondUser) {
+        Optional<Friendship> existingFriends = friendshipMap.values().stream().filter(friendship -> {
+            return Objects.equals(friendship.getFirstUserId() , firstUser) &&
+                    Objects.equals(friendship.getSecondUserId() , secondUser) ||
+                    Objects.equals(friendship.getFirstUserId() , secondUser) &&
+                            Objects.equals(friendship.getSecondUserId() , firstUser);
+        }).findAny();
+
+        if (existingFriends.isPresent()) {
+            friendshipMap.remove(existingFriends.get().getFriendshipId());
+            return true;
+        }
+
+        return false;
     }
 }

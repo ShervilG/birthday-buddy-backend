@@ -18,5 +18,6 @@ public class UrlConstant {
   public static final String FRIEND_API_BASE_URL = "/friend";
   public static final String ADD_FRIENDSHIP = "add";
   public static final String ALL_FRIENDSHIPS = "all";
+  public static final String DELETE_FRIENDSHIP = "delete";
   public static final String GET_USERS_FRIENDSHIPS = "find-all";
 }

@@ -33,4 +33,10 @@ public class FriendsController {
     public ResponseEntity<List<User>> getAllFriendsOfUser(@RequestParam("userId") String userId) {
         return new ResponseEntity<>(this.friendService.getAllUsersFriend(userId), HttpStatus.OK);
     }
+
+    @PostMapping(UrlConstant.DELETE_FRIENDSHIP)
+    public boolean delete(@RequestParam("firstUser") String firstUser,
+                       @RequestParam("secondUser") String secondUser) {
+        return this.friendService.delete(firstUser,secondUser);
+    }
 }

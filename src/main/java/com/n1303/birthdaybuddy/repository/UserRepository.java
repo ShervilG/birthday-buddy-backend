@@ -57,4 +57,10 @@ public class UserRepository {
     return userMap.values().stream().filter(user -> userIdList.contains(user.getUserId()))
         .collect(Collectors.toList());
   }
+
+  public List<User> getAllUsersWithBirthdayOn(int date, int month) {
+    return userMap.values().stream().filter(user -> user.getDateOfBirth().getMonth() + 1 == month &&
+            user.getDateOfBirth().getDate() == date)
+        .collect(Collectors.toList());
+  }
 }

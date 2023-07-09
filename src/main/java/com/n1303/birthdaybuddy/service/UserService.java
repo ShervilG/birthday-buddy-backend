@@ -40,4 +40,8 @@ public class UserService {
 
     return userRepository.getAllUsersThatMatchSearchCriteria(searchCriteriaList);
   }
+
+  public List<User> getAllUsersWithBirthdayOn(int date, int month) {
+    return userRepository.getAllUsersWithBirthdayOn(date, month);
+  }
 }

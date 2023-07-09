@@ -11,10 +11,9 @@ import java.util.stream.Collectors;
 @Repository
 public class FriendshipRepository {
 
+    private final Map<String, Friendship> friendshipMap;
     @Autowired
     private UserRepository userRepository;
-
-    private final Map<String, Friendship> friendshipMap;
 
     public FriendshipRepository() {
         this.friendshipMap = new HashMap<>();
@@ -26,10 +25,10 @@ public class FriendshipRepository {
 
     public Friendship insert(String firstUser, String secondUser) {
         Optional<Friendship> existingFriends = friendshipMap.values().stream().filter(friendship -> {
-            return Objects.equals(friendship.getFirstUserId() , firstUser) &&
-                    Objects.equals(friendship.getSecondUserId() , secondUser) ||
-                    Objects.equals(friendship.getFirstUserId() , secondUser) &&
-                    Objects.equals(friendship.getSecondUserId() , firstUser);
+            return Objects.equals(friendship.getFirstUserId(), firstUser) &&
+                    Objects.equals(friendship.getSecondUserId(), secondUser) ||
+                    Objects.equals(friendship.getFirstUserId(), secondUser) &&
+                            Objects.equals(friendship.getSecondUserId(), firstUser);
         }).findAny();
 
         // If friendship exists, return it.
@@ -50,10 +49,10 @@ public class FriendshipRepository {
 
     public List<User> getAllFriendsOfUser(String userId) {
         Set<String> friendsUserIdList = friendshipMap.values().stream().filter(friendship ->
-            friendship.getFirstUserId().equals(userId) || friendship.getSecondUserId().equals(userId))
-            .map(friendship -> friendship.getFirstUserId().equals(userId) ? friendship.getSecondUserId() :
-                friendship.getFirstUserId())
-            .collect(Collectors.toSet());
+                        friendship.getFirstUserId().equals(userId) || friendship.getSecondUserId().equals(userId))
+                .map(friendship -> friendship.getFirstUserId().equals(userId) ? friendship.getSecondUserId() :
+                        friendship.getFirstUserId())
+                .collect(Collectors.toSet());
 
         if (friendsUserIdList.size() == 0) {
             return new ArrayList<>();
@@ -62,19 +61,14 @@ public class FriendshipRepository {
         return userRepository.getAllUsersInRange(friendsUserIdList);
     }
 
-    public boolean delete(String firstUser, String secondUser) {
+    public Friendship delete(String firstUser, String secondUser) {
         Optional<Friendship> existingFriends = friendshipMap.values().stream().filter(friendship -> {
-            return Objects.equals(friendship.getFirstUserId() , firstUser) &&
-                    Objects.equals(friendship.getSecondUserId() , secondUser) ||
-                    Objects.equals(friendship.getFirstUserId() , secondUser) &&
-                            Objects.equals(friendship.getSecondUserId() , firstUser);
+            return Objects.equals(friendship.getFirstUserId(), firstUser) &&
+                    Objects.equals(friendship.getSecondUserId(), secondUser) ||
+                    Objects.equals(friendship.getFirstUserId(), secondUser) &&
+                            Objects.equals(friendship.getSecondUserId(), firstUser);
         }).findAny();
 
-        if (existingFriends.isPresent()) {
-            friendshipMap.remove(existingFriends.get().getFriendshipId());
-            return true;
-        }
-
-        return false;
+        return friendshipMap.remove(existingFriends.get().getFriendshipId());
     }
 }

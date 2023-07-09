@@ -19,14 +19,14 @@ public class FriendService {
     }
 
     public Friendship insert(String firstUser, String secondUser) {
-        return friendshipRepository.insert(firstUser,secondUser);
+        return friendshipRepository.insert(firstUser, secondUser);
     }
 
     public List<User> getAllUsersFriend(String userId) {
         return friendshipRepository.getAllFriendsOfUser(userId);
     }
 
-    public boolean delete(String firstUser, String secondUser) {
-        return friendshipRepository.delete(firstUser,secondUser);
+    public Friendship delete(String firstUser, String secondUser) {
+        return friendshipRepository.delete(firstUser, secondUser);
     }
 }

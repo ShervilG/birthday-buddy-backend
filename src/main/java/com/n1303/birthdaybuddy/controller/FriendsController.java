@@ -26,7 +26,7 @@ public class FriendsController {
     @PostMapping(UrlConstant.ADD_FRIENDSHIP)
     public ResponseEntity<Friendship> insert(@RequestParam("firstUser") String firstUser,
                                              @RequestParam("secondUser") String secondUser) {
-        return new ResponseEntity<>(this.friendService.insert(firstUser,secondUser), HttpStatus.OK);
+        return new ResponseEntity<>(this.friendService.insert(firstUser, secondUser), HttpStatus.OK);
     }
 
     @GetMapping(UrlConstant.GET_USERS_FRIENDSHIPS)
@@ -35,8 +35,8 @@ public class FriendsController {
     }
 
     @PostMapping(UrlConstant.DELETE_FRIENDSHIP)
-    public boolean delete(@RequestParam("firstUser") String firstUser,
-                       @RequestParam("secondUser") String secondUser) {
-        return this.friendService.delete(firstUser,secondUser);
+    public ResponseEntity<Friendship> delete(@RequestParam("firstUser") String firstUser,
+                                             @RequestParam("secondUser") String secondUser) {
+        return new ResponseEntity<>(this.friendService.delete(firstUser, secondUser), HttpStatus.OK);
     }
 }

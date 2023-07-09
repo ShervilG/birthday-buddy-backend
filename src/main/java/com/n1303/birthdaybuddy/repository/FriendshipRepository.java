@@ -2,12 +2,17 @@ package com.n1303.birthdaybuddy.repository;
 
 import com.n1303.birthdaybuddy.entity.Friendship;
 import com.n1303.birthdaybuddy.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class FriendshipRepository {
+
+    @Autowired
+    private UserRepository userRepository;
 
     private final Map<String, Friendship> friendshipMap;
 
@@ -43,4 +48,17 @@ public class FriendshipRepository {
         return friendship;
     }
 
+    public List<User> getAllFriendsOfUser(String userId) {
+        Set<String> friendsUserIdList = friendshipMap.values().stream().filter(friendship ->
+            friendship.getFirstUserId().equals(userId) || friendship.getSecondUserId().equals(userId))
+            .map(friendship -> friendship.getFirstUserId().equals(userId) ? friendship.getSecondUserId() :
+                friendship.getFirstUserId())
+            .collect(Collectors.toSet());
+
+        if (friendsUserIdList.size() == 0) {
+            return new ArrayList<>();
+        }
+
+        return userRepository.getAllUsersInRange(friendsUserIdList);
+    }
 }

@@ -1,6 +1,7 @@
 package com.n1303.birthdaybuddy.service;
 
 import com.n1303.birthdaybuddy.entity.Friendship;
+import com.n1303.birthdaybuddy.entity.User;
 import com.n1303.birthdaybuddy.repository.FriendshipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,9 @@ public class FriendService {
 
     public Friendship insert(String firstUser, String secondUser) {
         return friendshipRepository.insert(firstUser,secondUser);
+    }
+
+    public List<User> getAllUsersFriend(String userId) {
+        return friendshipRepository.getAllFriendsOfUser(userId);
     }
 }

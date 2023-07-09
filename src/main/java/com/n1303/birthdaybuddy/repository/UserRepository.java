@@ -52,4 +52,9 @@ public class UserRepository {
       return searchPredicate.test(user, searchCriteria);
     }).collect(Collectors.toList());
   }
+
+  public List<User> getAllUsersInRange(Set<String> userIdList) {
+    return userMap.values().stream().filter(user -> userIdList.contains(user.getUserId()))
+        .collect(Collectors.toList());
+  }
 }

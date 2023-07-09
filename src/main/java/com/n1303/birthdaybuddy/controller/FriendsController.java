@@ -37,6 +37,8 @@ public class FriendsController {
     @PostMapping(UrlConstant.DELETE_FRIENDSHIP)
     public ResponseEntity<Friendship> delete(@RequestParam("firstUser") String firstUser,
                                              @RequestParam("secondUser") String secondUser) {
-        return new ResponseEntity<>(this.friendService.delete(firstUser, secondUser), HttpStatus.OK);
+        Friendship friendship = this.friendService.delete(firstUser, secondUser);
+
+        return new ResponseEntity<>(friendship, friendship != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 }

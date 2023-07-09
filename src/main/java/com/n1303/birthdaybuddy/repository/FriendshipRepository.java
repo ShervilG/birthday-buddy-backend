@@ -69,6 +69,8 @@ public class FriendshipRepository {
                             Objects.equals(friendship.getSecondUserId(), firstUser);
         }).findAny();
 
-        return friendshipMap.remove(existingFriends.get().getFriendshipId());
+        if(existingFriends.isPresent())
+            return friendshipMap.remove(existingFriends.get().getFriendshipId());
+        return null;
     }
 }

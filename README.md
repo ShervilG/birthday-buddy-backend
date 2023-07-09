@@ -1,4 +1,6 @@
 # Welcome To Birthday Buddy Backend
+## Overview
+This backend application is for finding and connecting with users online who have shared their birthday details. An automatic Google Calendar invite will be triggered for all the user's friends on their birthday eve.
 
 ## Here are the simple setup instructions
 - Clone this repository in your machine. 

@@ -13,4 +13,6 @@ public class InviteCreationRequest {
 
   @JsonProperty("email_list")
   private List<String> emailList;
+  @JsonProperty("name")
+  private String name;
 }

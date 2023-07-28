@@ -64,7 +64,7 @@ public class InviteCreationScheduler {
           return;
         }
 
-        appScriptHelper.createBirthdayInvite(friends.stream().map(User::getUserEmail).collect(Collectors.toList()));
+        appScriptHelper.createBirthdayInvite(friends.stream().map(User::getUserEmail).collect(Collectors.toList()), user.getUserName());
 
         log.info("Invite created for: {}'s friends", user.getUserName());
       }));

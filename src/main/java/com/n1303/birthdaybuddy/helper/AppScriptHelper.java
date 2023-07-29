@@ -30,8 +30,8 @@ public class AppScriptHelper {
     return restTemplate.exchange(baseUrl, HttpMethod.GET, httpEntity, String.class).getBody();
   }
 
-  public String createBirthdayInvite(List<String> emailList) {
-    InviteCreationRequest inviteCreationRequest = new InviteCreationRequest(emailList);
+  public String createBirthdayInvite(List<String> emailList, String name) {
+    InviteCreationRequest inviteCreationRequest = new InviteCreationRequest(emailList, name);
 
     HttpHeaders headers = new HttpHeaders();
     headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
